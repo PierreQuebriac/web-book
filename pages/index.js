@@ -1,5 +1,6 @@
 import Feuille from "../components/Feuille";
 import ButtonManager from "../components/ButtonManager";
+
 function Home() {
   let currentFeuille = 0;
   let pages = [];
