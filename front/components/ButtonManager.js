@@ -11,7 +11,26 @@ const suppOne = (i) => {
   return i - 1;
 };
 const ButtonManager = (props) => {
+  const [message, setMessage] = React.useState("");
+  const handleMessageChange = (event) => setMessage(event.target.value);
   let i = props.currentFeuille;
+
+  const handleSubmit = async (event) => {
+    // Prevent browser to submit
+    event.preventDefault();
+    // Send data
+    const response = await fetch("http://localhost:8080/posts", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ page: 1, type: "texte", content: message }),
+    });
+    // Refresh messages
+    //mutate("http://localhost:8080/posts/");
+
+    //Clear state
+    console.log(response);
+    setMessage("");
+  };
   return (
     <div>
       <button id="button" className="container-fluid" onClick={addOne}>
@@ -19,9 +38,17 @@ const ButtonManager = (props) => {
       </button>
 
       <Popup trigger={<button> Ajouter du texte </button>} position="right center">
-        <form action="/api/feuilles" method="post">
-          <label htmlFor="text">Texte :</label>
-          <input type="text" id="text" name="texte" />
+        <form onSubmit={handleSubmit} method="post">
+          <span className="input-group-text bg-light">Message</span>
+          <textarea
+            onChange={handleMessageChange}
+            id="message"
+            name="Message"
+            placeholder="Texte de la page"
+            className="form-control"
+            value={message}
+            required
+          />
 
           <button type="submit">Ajouter</button>
         </form>

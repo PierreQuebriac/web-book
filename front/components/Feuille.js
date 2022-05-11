@@ -29,7 +29,7 @@ const fetcher = async (url) => {
 //   return messages.reverse();
 // };
 const Feuille = (props) => {
-  const { data, error } = useSWR("http://localhost:8080/posts/2", fetcher, {
+  const { data, error } = useSWR("http://localhost:8080/posts/0", fetcher, {
     refreshInterval: 20000,
   });
   console.log(error);

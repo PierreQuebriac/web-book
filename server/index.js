@@ -2,22 +2,12 @@
 const Express = require("express");
 const app = Express();
 const DB = require("./database/db.js");
+app.use(Express.json());
 
-app.get("/posts", (req, res) => {
+app.get("/posts/:page", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  DB.all("SELECT * FROM posts", (err, rows) => {
-    if (err) {
-      console.log(err);
-      res.end("error");
-    }
-    res.json(rows);
-  });
-});
-
-app.get("/posts/:id", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  const postID = req.params.id;
-  DB.all("SELECT * FROM POSTS WHERE ID= ?", [postID], (err, rows) => {
+  const page_num = req.params.page;
+  DB.all("SELECT * FROM PAGES WHERE PAGE_NUM= ?", [page_num], (err, rows) => {
     if (err) {
       console.log(err);
       res.end("error");
@@ -27,19 +17,19 @@ app.get("/posts/:id", (req, res) => {
   });
 });
 
-app.get("/hello", (req, res) => {
+app.post("/posts", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.end("hello");
-});
-
-app.get("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.end("foo");
-});
-
-app.get("/bar", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.end("bar");
+  console.log(req.body);
+  const page_num = req.body.page;
+  const type = req.body.type;
+  const content = req.body.content;
+  DB.all("INSERT INTO  PAGES (PAGE_NUM = ?,ATTRIBUT = ?, CONTENT= ?)", [page_num, type, content], (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.end("error");
+    }
+    res.json(null);
+  });
 });
 
 app.listen(8080);
