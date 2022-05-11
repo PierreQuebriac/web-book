@@ -8,28 +8,14 @@ const fetcher = async (url) => {
     const response = await fetch(urlWithPage).then((response) => response.json(), { mode: "cors" });
     content = response[0];
     finished = response.length !== 0;
-    console.log(finished);
-    console.log(response);
   }
   return content;
 };
 
-// const fetcher = async (url) => {
-//   let pageIndex = 0;
-//   let messages = [];
-//   let finished = false;
-//   while (!finished) {
-//     let urlWithPage = `${url}?page=${pageIndex}`;
-//     const response = await fetch(urlWithPage).then((response) => response.json());
-//     messages = messages.concat(response);
-//     pageIndex += 1;
-//     finished = response.length === 0;
-//     //console.log(messages);
-//   }
-//   return messages.reverse();
-// };
 const Feuille = (props) => {
-  const { data, error } = useSWR("http://localhost:8080/posts/0", fetcher, {
+  let page = props.page;
+  console.log("http://localhost:8080/posts/" + String(page));
+  const { data, error } = useSWR("http://localhost:8080/posts/" + String(page), fetcher, {
     refreshInterval: 20000,
   });
   console.log(error);

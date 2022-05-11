@@ -6,7 +6,13 @@ CREATE TABLE PAGES(
 );
 
 INSERT INTO PAGES (PAGE_NUM,ATTRIBUT, CONTENT)
-VALUES (0, 'text',"Voilà la première page du livre");
+VALUES (1, 'text',"Voilà la première page du livre");
+INSERT INTO PAGES (PAGE_NUM,ATTRIBUT, CONTENT)
+VALUES (2, 'text',"Voilà la deuxième page du livre");
+INSERT INTO PAGES (PAGE_NUM,ATTRIBUT, CONTENT)
+VALUES (3, 'text',"Voilà la troisième page du livre");
+INSERT INTO PAGES (PAGE_NUM,ATTRIBUT, CONTENT)
+VALUES (4, 'text',"Voilà la quatrième page du livre");
 
 
 

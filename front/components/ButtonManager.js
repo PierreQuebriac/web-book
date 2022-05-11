@@ -23,6 +23,7 @@ const ButtonManager = (props) => {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ page: 1, type: "texte", content: message }),
+      mode: "cors",
     });
     // Refresh messages
     //mutate("http://localhost:8080/posts/");

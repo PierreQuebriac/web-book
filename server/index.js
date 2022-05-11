@@ -13,22 +13,23 @@ app.get("/posts/:page", (req, res) => {
       res.end("error");
     }
     console.log(rows);
+
     res.json(rows);
   });
 });
 
 app.post("/posts", (req, res) => {
+  console.log("j'envoie un truc");
   res.setHeader("Access-Control-Allow-Origin", "*");
-  console.log(req.body);
   const page_num = req.body.page;
   const type = req.body.type;
   const content = req.body.content;
-  DB.all("INSERT INTO  PAGES (PAGE_NUM = ?,ATTRIBUT = ?, CONTENT= ?)", [page_num, type, content], (err, rows) => {
+  DB.run("INSERT INTO  PAGES (PAGE_NUM = ?,ATTRIBUT = ?, CONTENT= ?)", [page_num, type, content], (err, rows) => {
     if (err) {
       console.log(err);
       res.end("error");
     }
-    res.json(null);
+    res.status(200).json(null);
   });
 });
 
