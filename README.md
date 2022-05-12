@@ -18,8 +18,8 @@ Vous pouvez voir la page actuelle dans le nom de l'onglet de l'application.
 
 Pour lancer le projet, placez vous dans le dossier my-book et lancez la commande :
 
-'''bash
+```bash
 
 npm run dev
 
-'''
+```
