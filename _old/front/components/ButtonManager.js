@@ -21,7 +21,7 @@ const ButtonManager = (props) => {
     // Send data
     const response = await fetch("http://localhost:8080/posts", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json", "Access-Control-Allow-Origin": "" },
       body: JSON.stringify({ page: 1, type: "texte", content: message }),
       mode: "cors",
     });
