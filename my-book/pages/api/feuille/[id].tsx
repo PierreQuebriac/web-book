@@ -45,6 +45,6 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
 // Basic response to test the connexion between all component
 export default function getPageByID(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
-    res.json({ ID: req.query.id, type: 0, content: "page number : " + String(req.query.id) });
+    res.status(200).json({ ID: req.query.id, type: 0, content: "page number : " + String(req.query.id) });
   }
 }
