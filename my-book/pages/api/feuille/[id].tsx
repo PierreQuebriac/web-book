@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { stringify } from "querystring";
 import sqlite3 from "sqlite3";
 
+//Create a SQLite DB
 const DBSOURCE = "./pages.sqlite";
 
 let db = new sqlite3.Database(DBSOURCE, (err) => {
@@ -27,15 +29,22 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
   }
 });
 
+// SELECT the right row to display as a feuille (not fonctional)
+
+// export default function getPageByID(req: NextApiRequest, res: NextApiResponse) {
+//   if (req.method === "GET") {
+//     db.all("SELECT * FROM PAGES WHERE ID=?", [req.query.id], (err, rows) => {
+//       if (err) {
+//         res.end("error");
+//       }
+//       res.json(rows);
+//     });
+//   }
+// }
+
+// Basic response to test the connexion between all component
 export default function getPageByID(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
-    db.all("SELECT * FROM PAGES WHERE ID=?", [req.query.id], (err, rows) => {
-      if (err) {
-        //console.log(err);
-        res.end("error");
-      }
-      console.log(rows);
-      res.json(rows);
-    });
+    res.json({ ID: req.query.id, type: 0, content: "page number : " + String(req.query.id) });
   }
 }

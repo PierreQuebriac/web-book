@@ -7,10 +7,15 @@ interface Props {
   onPageChange: (page: number) => void;
 }
 
+// A Conponenent to manage the button of the page.
+// With this architecture it's easier to manage their style
 const ButtonManager = ({ page, onPageChange }: Props) => {
+  //Add One to the page counter
   const handlePageAdd = () => {
     onPageChange(page + 1);
   };
+
+  //reduce by one the page counter
   const handlePageMin = () => {
     if (page - 1 < 0) {
       return;
